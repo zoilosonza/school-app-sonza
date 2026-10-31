@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SchoolApp.Validation;
 
 namespace SchoolApp.Models
 {
@@ -41,6 +42,12 @@ namespace SchoolApp.Models
         [Range(16, 60, ErrorMessage = "Age must be from 16 to 60.")]
         public int? Age { get; set; }
 
+        [Display(Name = "Birth Date")]
+        // Shows a date picker without the time
+        [DataType(DataType.Date)]
+        // Our custom rule from Validation/NotFutureDateAttribute.cs
+        [NotFutureDate(ErrorMessage = "Birth date can't be in the future.")]
         public DateTime? BirthDate { get; set; }
+
     }
 }
